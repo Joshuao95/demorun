@@ -30,12 +30,13 @@
 (defvar demorun--demo-frame)
 
 ;; TODO: Should be a customisable dude
-(defvar demorun-commands '((:file . find-file)))
+(defvar demorun-commands '((:file . find-file)
+			   (:run . (lambda (command) (insert command) (sit-for 5) (comint-send-input)))))
 
 (defmacro demorun--save-frame-excursion (&rest BODY)
   "Eval BODY in the demo frame."
   `(progn
-     (select-frame-set-input-focus demorun-demo-frame)
+     (select-frame-set-input-focus demorun--demo-frame)
      ,@BODY
      (select-frame-set-input-focus (selected-frame))))
 
