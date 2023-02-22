@@ -64,14 +64,3 @@ COMMANDS should be a PLIST of keywords and args as defined by demorun-commands"
 (provide 'demorun)
 
 ;;; demorun.el ends here
-
-
-
-
-
-
-
-;; open "demo.org"
-;; shell
-;; show-insert-run "nomad run sickjob.hcl"
-;; (some-non-planned-function)
