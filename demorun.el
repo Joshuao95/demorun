@@ -32,7 +32,7 @@
 
 ;; TODO: Should be a customisable dude
 (defvar demorun-commands '((:file . find-file)
-			   (:run . (lambda (command) (insert command) (sit-for 5) (comint-send-input)))
+			   (:run . (lambda (command) (demorun--type command) (sit-for 5) (comint-send-input)))
 			   (:type . demorun--type)
 			   (:lisp . (lambda (form-list) (mapc (lambda (form) (eval form)) form-list)))))
 
