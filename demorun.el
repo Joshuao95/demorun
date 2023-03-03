@@ -28,10 +28,20 @@
 (require 'map)
 
 (defvar demorun--demo-frame)
+(defvar demorun-typing-speed 0.01 "Delay in seconds between characters for :type.")
 
 ;; TODO: Should be a customisable dude
 (defvar demorun-commands '((:file . find-file)
-			   (:run . (lambda (command) (insert command) (sit-for 5) (comint-send-input)))))
+			   (:run . (lambda (command) (insert command) (sit-for 5) (comint-send-input)))
+			   (:type . demorun--type-string)))
+
+;; Demo Helpers
+
+(defun demorun--type-string (string &optional delay)
+  "Insert STRING at one char/DELAY speed."
+  (let ((delay (or delay demorun-typing-speed)))
+    (mapc (lambda (c) (sleep-for delay) (insert c) (redisplay t))
+	  string)))
 
 (defmacro demorun--save-frame-excursion (&rest BODY)
   "Eval BODY in the demo frame."
