@@ -33,11 +33,12 @@
 ;; TODO: Should be a customisable dude
 (defvar demorun-commands '((:file . find-file)
 			   (:run . (lambda (command) (insert command) (sit-for 5) (comint-send-input)))
-			   (:type . demorun--type-string)))
+			   (:type . demorun--type)
+			   (:lisp . (lambda (form-list) (mapc (lambda (form) (eval form)) form-list)))))
 
 ;; Demo Helpers
 
-(defun demorun--type-string (string &optional delay)
+(defun demorun--type (string &optional delay)
   "Insert STRING at one char/DELAY speed."
   (let ((delay (or delay demorun-typing-speed)))
     (mapc (lambda (c) (sleep-for delay) (insert c) (redisplay t))
